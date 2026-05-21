@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <title>Kilo Seminyak</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Michroma&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Manrope:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;700&family=Bricolage+Grotesque:wght@400;500;600;700;800&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Montserrat', sans-serif; background: #f5f0e8; color: #3a3228; }
+
+    /* Typography */
+    .section-heading {
+      font-family: 'Michroma', sans-serif;
+      font-weight: 700;
+      font-size: 38px;
+      color: #811910;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      line-height: 1.1;
+      text-align: left;
+    }
+    .section-subtext {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 300;
+      font-size: 19px;
+      color: #6b5e4e;
+      line-height: 1.85;
+      text-align: justify;
+    }
+
+    /* Hero */
+    .hero-section {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      min-height: 700px;
+      overflow: hidden;
+    }
+    .hero-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+      z-index: 0;
+      transform: translateZ(0);
+      backface-visibility: hidden;
+    }
+    
+    .bg-cream { background-color: #f5f0e8; }
+
+    /* MENU GRID */
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      padding: 32px 32px 48px;
+      background: #f5f0e8;
+    }
+    .menu-cell {
+      border-radius: 24px;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      display: block;
+      text-decoration: none;
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+    }
+    .menu-cell:hover { box-shadow: 0 12px 32px rgba(43,30,10,0.14); }
+    .menu-img-wrap {
+      width: 100%;
+      height: 420px;
+      overflow: hidden;
+      position: relative;
+    }
+    .menu-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .menu-img-label {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.15) 35%, rgba(0,0,0,0) 60%);
+      z-index: 2;
+      pointer-events: none;
+    }
+    .menu-label-row {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      right: 20px;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .menu-label-row span {
+      font-family: 'Michroma', sans-serif;
+      font-size: 17px;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      color: #fff;
+      text-transform: uppercase;
+      text-shadow: 0 1px 8px rgba(0,0,0,0.5);
+    }
+    .menu-arrow-btn {
+      width: 38px;
+      height: 38px;
+      background: #811910;
+      backdrop-filter: blur(6px);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 18px;
+      font-weight: 300;
+      flex-shrink: 0;
+      transition: background 0.25s;
+    }
+
+    /* Testimonial */
+    .image-section {
+      position: relative;
+      width: 100%;
+      height: 300px;
+      overflow: hidden;
+    }
+    .image-section img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .image-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+    }
+    .testimonial-wrapper {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .testimonial-slider {
+      overflow: hidden;
+      width: 100%;
+      max-width: 800px;
+    }
+    .testimonial-track {
+      display: flex;
+      transition: transform 0.4s ease;
+    }
+    .testimonial-item {
+      min-width: 100%;
+      text-align: center;
+      color: #fff;
+      padding: 0 20px;
+    }
+    .stars { color: #f5a623; font-size: 19px; letter-spacing: 4px; }
+    .review {
+      font-size: 19px;
+      font-weight: 300;
+      line-height: 1.75;
+      margin-top: 20px;
+      color: #fff;
+      max-width: 620px;
+      margin-left: auto;
+      margin-right: auto;
+      font-style: italic;
+      font-family: 'Montserrat', sans-serif;
+    }
+    .rating {
+      font-size: 16px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      color: #fff;
+      margin-top: 8px;
+      font-family: 'Montserrat', sans-serif;
+    }
+    .testi {
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: #fff;
+      font-family: 'Michroma', sans-serif;
+    }
+    .nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: white;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      opacity: 0.8;
+    }
+    .prev { left: 40px; }
+    .next { right: 40px; }
+
+    /* Footer */
+    .footer {
+      background: #000;
+      padding: 70px 60px 40px;
+    }
+    .footer-container {
+      display: grid;
+      grid-template-columns: 260px 1fr 1fr 1.2fr;
+      gap: 60px;
+      margin-bottom: 50px;
+    }
+    .footer-brand {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .footer-brand img {
+      max-width: 180px;
+      display: block;
+    }
+    .footer-tagline {
+      margin-top: 18px;
+      font-size: 14px;
+      color: rgba(255,255,255,0.9);
+      line-height: 1.6;
+      max-width: 300px;
+      font-family: 'Montserrat', sans-serif;
+    }
+    .footer-links { display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a {
+      font-size: 15px;
+      color: rgba(255,255,255,0.9);
+      text-decoration: none;
+      transition: all 0.25s ease;
+      font-family: 'Montserrat', sans-serif;
+    }
+    .footer-info-title {
+      font-size: 15px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 16px;
+      font-family: 'Michroma', sans-serif;
+    }
+    .footer-info-text {
+      font-size: 15px;
+      color: rgba(255,255,255,0.9);
+      line-height: 1.8;
+      font-family: 'Montserrat', sans-serif;
+    }
+    .footer-map {
+      width: 100%;
+      height: 120px;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .footer-map iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+    .footer-bottom {
+      border-top: 1px solid rgba(242,235,219,0.12);
+      padding-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .socials a {
+      color: rgba(255,255,255,0.9);
+      margin-right: 16px;
+      font-size: 16px;
+      transition: all 0.3s ease;
+    }
+    .copyright {
+      font-size: 12px;
+      color: rgba(255,255,255,0.9);
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    /* ===== HAMBURGER MENU (POSISI KIRI) ===== */
+    .hamburger-btn {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1200;
+      background: none;
+      border: none;
+      width: 56px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      padding: 0;
+      transition: opacity 0.2s;
+    }
+    .hamburger-icon {
+      width: 22px;
+      height: 14px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .hamburger-icon .bar {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: white;
+      border-radius: 1px;
+      transition: transform 0.3s ease, opacity 0.3s ease, background 0.3s ease;
+      transform-origin: center center;
+    }
+    .hamburger-btn.scrolled .bar {
+      background: #000000;
+    }
+    .hamburger-btn.open .bar {
+      background: #fff !important;
+    }
+    .hamburger-btn.open .hamburger-icon .bar:nth-child(1) {
+      transform: translateY(6.25px) rotate(45deg);
+    }
+    .hamburger-btn.open .hamburger-icon .bar:nth-child(2) {
+      opacity: 0;
+      transform: scaleX(0);
+    }
+    .hamburger-btn.open .hamburger-icon .bar:nth-child(3) {
+      transform: translateY(-6.25px) rotate(-45deg);
+    }
+
+    /* ===== FIXED RSVP (untuk mobile/tablet) di kanan hamburger ===== */
+    .mobile-rsvp-btn {
+      position: fixed;
+      top: 0;
+      right: 0;
+      z-index: 1200;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: white;
+      text-decoration: none;
+      background: transparent;
+      transition: color 0.2s;
+    }
+    .mobile-rsvp-btn.scrolled {
+      color: #53472e;
+    }
+    .mobile-rsvp-btn.drawer-open {
+      color: #fff !important;
+    }
+
+    /* Nav overlay & drawer */
+    .nav-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      z-index: 1040;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s ease;
+    }
+    .nav-overlay.open { opacity: 1; pointer-events: all; }
+    .nav-drawer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 320px;
+      max-width: 88vw;
+      height: 100%;
+      background: #000;
+      z-index: 1050;
+      transform: translateX(-100%);
+      transition: transform 0.38s cubic-bezier(0.4,0,0.2,1);
+      overflow-y: auto;
+      padding: 80px 0 40px;
+    }
+    .nav-drawer.open { transform: translateX(0); }
+    .nav-item { position: relative; }
+    .nav-item > a, .nav-item > span {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 36px;
+      font-family: 'Michroma', sans-serif;
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #FBF6F6;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .nav-item > span i { font-size: 10px; transition: transform 0.25s; color: #FBF6F6; }
+    .nav-item.expanded > span i { transform: rotate(180deg); }
+    .nav-submenu { display: none; margin: 0; }
+    .nav-submenu.open { display: block; }
+    .nav-submenu a {
+      display: block;
+      padding: 14px 36px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      font-weight: 300;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #FBF6F6;
+      text-decoration: none;
+    }
+    .nav-submenu a:hover { background: #FBF6F6; color: #53472e; }
+    .nav-divider { height: 1px; background: rgba(182,159,127,0.2); margin: 8px 36px; }
+
+    /* ===== FLOATING WHATSAPP ===== */
+    .whatsapp-float {
+      position: fixed;
+      right: 20px;
+      bottom: 28px;
+      z-index: 999;
+      width: 52px;
+      height: 52px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 18px rgba(37,211,102,0.45);
+      text-decoration: none;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      animation: waPulse 2.5s ease-in-out infinite;
+    }
+    .whatsapp-float i { font-size: 26px; color: #fff; }
+    @keyframes waPulse {
+      0%   { box-shadow: 0 0 0 0 rgba(37,211,102,0.5); }
+      70%  { box-shadow: 0 0 0 12px rgba(37,211,102,0); }
+      100% { box-shadow: 0 0 0 0 rgba(37,211,102,0); }
+    }
+
+    /* ===== FIXED SCROLL NAVBAR ===== */
+    .scroll-navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 990;
+      background: #f5f0e8;
+      border-bottom: 1px solid rgba(83,71,46,0.15);
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 28px 0 64px;
+      transform: translateY(-100%);
+      transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+    }
+    .scroll-navbar.visible {
+      transform: translateY(0);
+    }
+    .scroll-navbar-left { width: 32px; }
+    .scroll-navbar-rsvp {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #53472e;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .scroll-navbar-rsvp:hover { color: #9e5135; }
+
+    /* ===== RESPONSIVE (Mobile & Tablet) ===== */
+    @media (max-width: 1024px) {
+      .menu-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 24px 24px 36px; }
+      .menu-img-wrap { height: 320px; }
+      .footer { padding: 56px 40px 32px; }
+      .footer-container { grid-template-columns: 1fr 1fr; gap: 40px; }
+      .scroll-navbar .scroll-navbar-rsvp { display: none; }
+      .scroll-navbar { justify-content: flex-end; padding-right: 20px; }
+    }
+
+    @media (max-width: 768px) {
+      .menu-grid { grid-template-columns: 1fr; gap: 12px; padding: 16px 16px 28px; }
+      .menu-img-wrap { height: 260px; }
+      .section-heading { font-size: 26px; }
+      .section-subtext  { font-size: 14px; }
+      .footer { padding: 48px 20px 28px; }
+      .footer-container { grid-template-columns: 1fr; gap: 32px; text-align: center; }
+      .footer-brand { align-items: center; }
+      .footer-links { align-items: center; }
+      .footer-bottom { flex-direction: column; gap: 14px; text-align: center; }
+      .nav { width: 28px; height: 28px; font-size: 12px; }
+      .prev { left: 10px; }
+      .next { right: 10px; }
+      .footer-brand {
+        align-items: center;
+        text-align: center;
+      }
+      .footer-tagline {
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+
+    @media (min-width: 1025px) {
+      .mobile-rsvp-btn {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== FIXED SCROLL NAVBAR ===== -->
+<nav class="scroll-navbar" id="scrollNavbar">
+  <div class="scroll-navbar-left"></div>
+  <a href="#" class="scroll-navbar-rsvp">RSVP</a>
+</nav>
+
+<!-- ===== MOBILE / TABLET RSVP ===== -->
+<a href="#" class="mobile-rsvp-btn" id="mobileRsvpBtn">RSVP</a>
+
+<!-- ===== FLOATING WHATSAPP ===== -->
+<a href="https://wa.me/6281246167618" target="_blank" class="whatsapp-float" aria-label="Chat on WhatsApp">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
+<!-- ===== HAMBURGER BUTTON ===== -->
+<button class="hamburger-btn" id="hamburgerBtn" aria-label="Open menu">
+  <div class="hamburger-icon">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+  </div>
+</button>
+
+<!-- ===== NAV OVERLAY & DRAWER ===== -->
+<div class="nav-overlay" id="navOverlay"></div>
+<nav class="nav-drawer" id="navDrawer">
+  <div class="nav-item"><a href="index.html">Home</a></div>
+  <div class="nav-divider"></div>
+  <div class="nav-item" id="item-menu">
+    <span>Menu <i class="fas fa-chevron-down"></i></span>
+    <div class="nav-submenu" id="sub-menu">
+      <a href="breakfast.html">Breakfast</a><a href="lunch.html">Lunch</a><a href="dinner.html">Dinner</a>
+      <a href="beverages.html">Beverages</a><a href="kids.html">Kids</a><a href="set-menu.html">Set Menu</a>
+      <a href="gift-voucher.html">Gift Voucher</a>
+    </div>
+  </div>
+  <div class="nav-divider"></div>
+  <div class="nav-item" id="item-group">
+    <span>Group Booking <i class="fas fa-chevron-down"></i></span>
+    <div class="nav-submenu" id="sub-group"><a href="group-booking.html">Group Booking</a><a href="private-space.html">Private Space</a></div>
+  </div>
+  <div class="nav-divider"></div>
+  <div class="nav-item"><a href="kilo-at-home.html">Events &amp; Catering by Bespoke</a></div>
+  <div class="nav-divider"></div>
+  <div class="nav-item" id="item-about">
+    <span>About <i class="fas fa-chevron-down"></i></span>
+    <div class="nav-submenu" id="sub-about"><a href="our-story.html">Our Story</a><a href="our-team.html">Our Team</a><a href="our-services.html">Our Services</a></div>
+  </div>
+  <div class="nav-divider"></div>
+  <div class="nav-item"><a href="blog.html">Blog</a></div>
+</nav>
+
+<!-- ===== HERO SECTION ===== -->
+<section class="hero-section">
+  <video class="hero-video" autoplay muted loop playsinline preload="metadata">
+    <source src="https://ia600809.us.archive.org/30/items/kilosk/kilosk.mp4" type="video/mp4">
+  </video>
+</section>
+
+<!-- ===== SECTION "A FUSION OF STORIES" ===== -->
+<section class="bg-cream" id="our-food-section" style="padding: 48px 48px 10px;">
+  <div style="max-width:auto; margin:0 auto; text-align:center;">
+    <h2 class="section-heading" style="margin-bottom:20px;">A FUSION OF STORIES</h2>
+    <p class="section-subtext" style="line-height:1.85;">Best described as fusion food, kilo's menu takes inspiration from different cuisines around the world &amp; draws on the heritage of its owners and chefs. Kilo's food direction is a result of collaboration between and constant refinement from the founders. It tells the story of our founders—two latin-american men setting their roots in asia, and pulls inspiration from their travels and experiences around the region. The result is a cuisine which is best described as refined comfort food. The menu consists of a generous number of starters that are recommended to be shared (under the raw, small, and salad sections) and a selection of mains (all for one &amp; one for all) and desserts (sweets).</p>
+  </div>
+</section>
+
+<!-- ===== MENU GRID ===== -->
+<section style="padding: 0; margin: 0; background:#f5f0e8;">
+  <div class="menu-grid">
+    <a href="breakfast.html" class="menu-cell"><div class="menu-img-wrap"><img src="https://github.com/zeroykim/draft-web-kilo/blob/main/assets/mix/big-breakfast.jpg?raw=true" alt="Breakfast"><div class="menu-img-label"></div><div class="menu-label-row"><span>Breakfast</span><div class="menu-arrow-btn">+</div></div></div></a>
+    <a href="lunch.html" class="menu-cell"><div class="menu-img-wrap"><img src="https://github.com/zeroykim/draft-web-kilo/blob/main/assets/lunch/octopus-a-la-plancha.jpg?raw=true" alt="Lunch"><div class="menu-img-label"></div><div class="menu-label-row"><span>Lunch</span><div class="menu-arrow-btn">+</div></div></div></a>
+    <a href="dinner.html" class="menu-cell"><div class="menu-img-wrap"><img src="https://github.com/zeroykim/draft-web-kilo/blob/main/assets/lunch/kilo-steak-tartare.jpg?raw=true" alt="Dinner"><div class="menu-img-label"></div><div class="menu-label-row"><span>Dinner</span><div class="menu-arrow-btn">+</div></div></div></a>
+    <a href="beverages.html" class="menu-cell"><div class="menu-img-wrap"><img src="https://github.com/zeroykim/draft-web-kilo/blob/main/assets/beverages/pumpkin-mango-sour.jpg?raw=true" alt="Beverages"><div class="menu-img-label"></div><div class="menu-label-row"><span>Beverages</span><div class="menu-arrow-btn">+</div></div></div></a>
+  </div>
+</section>
+
+<!-- ===== TESTIMONIAL ===== -->
+<section class="image-section">
+  <img src="https://github.com/zeroykim/draft-web-kilo/blob/main/assets/mix/2023.12.15%20(90%20of%20118).jpg?raw=true" alt="testimonial background">
+  <div class="image-overlay"></div>
+  <div class="testimonial-wrapper">
+    <button class="nav prev">&#10094;</button>
+    <div class="testimonial-slider">
+      <div class="testimonial-track">
+        <div class="testimonial-item"><h2 class="testi">TESTIMONIAL</h2><p class="rating">4.7/5 from 5800+ combined reviews</p><div class="stars">★★★★★</div><p class="review">I had breakfast and dinner here, I’ll be back again, everything was very tasty :)</p></div>
+        <div class="testimonial-item"><h2 class="testi">TESTIMONIAL</h2><p class="rating">4.7/5 from 5800+ combined reviews</p><div class="stars">★★★★★</div><p class="review">Amazing ambience and great service. Highly recommended!</p></div>
+        <div class="testimonial-item"><h2 class="testi">TESTIMONIAL</h2><p class="rating">4.7/5 from 5800+ combined reviews</p><div class="stars">★★★★★</div><p class="review">Food was incredible, definitely coming back next trip!</p></div>
+      </div>
+    </div>
+    <button class="nav next">&#10095;</button>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-brand">
+      <img src="https://kiloseminyak.com/wp-content/uploads/2023/12/TC_white_winner-gif_L_2024.gif" alt="Kilo award - TripAdvisor Travelers Choice">
+      <div class="footer-tagline">We are honored to be included<br> among travelers favorites <br/>3 years in a row</div>
+    </div>
+    <div>
+      <div class="footer-info-title">Discover</div>
+      <div class="footer-links">
+        <a href="#">RSVP</a>
+        <a href="#">Menu</a>
+        <a href="#">Group Booking</a>
+        <a href="#">Events &amp; Catering by Bespoke</a>
+        <a href="#">About</a>
+        <a href="#">Blog</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-info-title">Contact</div>
+      <div class="footer-info-text">
+        office@kilobali.com<br>
+        +62 812 4616 7618
+      </div>
+    </div>
+    <div>
+      <div class="footer-info-title">Location</div>
+      <div class="footer-map">
+        <iframe src="https://maps.google.com/maps?q=Kilo%20Kitchen%20Bali&t=&z=15&ie=UTF8&iwloc=&output=embed" loading="lazy" title="Kilo Bali map"></iframe>
+      </div>
+      <div style="font-size:12px; color: rgba(255,255,255,0.9); margin-top:12px; line-height:1.6; text-align: center;">Jl. Drupadi No.22, Seminyak, Kec. Kuta, Kabupaten Badung, Bali 80361</div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="socials">
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-facebook-f"></i></a>
+      <a href="#"><i class="fab fa-whatsapp"></i></a>
+      <a href="#"><i class="fab fa-tiktok"></i></a>
+    </div>
+    <div class="copyright">
+      Copyright © 2026 Kilo Seminyak
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ======================= HAMBURGER + DRAWER =======================
+  const btn = document.getElementById('hamburgerBtn');
+  const drawer = document.getElementById('navDrawer');
+  const overlayNav = document.getElementById('navOverlay');
+  const mobileRsvp = document.getElementById('mobileRsvpBtn');
+  
+  function openMenu() { 
+    btn.classList.add('open'); 
+    drawer.classList.add('open'); 
+    overlayNav.classList.add('open'); 
+    document.body.style.overflow = 'hidden';
+    if (mobileRsvp) mobileRsvp.classList.add('drawer-open');
+  }
+  function closeMenu() { 
+    btn.classList.remove('open'); 
+    drawer.classList.remove('open'); 
+    overlayNav.classList.remove('open'); 
+    document.body.style.overflow = '';
+    if (mobileRsvp) mobileRsvp.classList.remove('drawer-open');
+  }
+  btn.addEventListener('click', () => { drawer.classList.contains('open') ? closeMenu() : openMenu(); });
+  overlayNav.addEventListener('click', closeMenu);
+  
+  // Submenu toggles
+  const submenus = [
+    { item: 'item-menu', sub: 'sub-menu' },
+    { item: 'item-group', sub: 'sub-group' },
+    { item: 'item-about', sub: 'sub-about' },
+  ];
+  submenus.forEach(({ item, sub }) => {
+    const el = document.getElementById(item);
+    const subEl = document.getElementById(sub);
+    if (el && subEl) {
+      const span = el.querySelector('span');
+      if (span) {
+        span.addEventListener('click', () => {
+          const isOpen = subEl.classList.contains('open');
+          document.querySelectorAll('.nav-submenu').forEach(s => s.classList.remove('open'));
+          document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('expanded'));
+          if (!isOpen) { subEl.classList.add('open'); el.classList.add('expanded'); }
+        });
+      }
+    }
+  });
+
+  // ======================= SCROLL NAVBAR + HAMBURGER COLOR + MOBILE RSVP =======================
+  const scrollNav = document.getElementById('scrollNavbar');
+  const foodSection = document.getElementById('our-food-section');
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  
+  function handleScrollAndNavbar() {
+    if (!foodSection) return;
+    const sectionRect = foodSection.getBoundingClientRect();
+    const threshold = 56;
+    if (sectionRect.top <= threshold) {
+      scrollNav.classList.add('visible');
+      if (hamburgerBtn && !hamburgerBtn.classList.contains('open')) {
+        hamburgerBtn.classList.add('scrolled');
+      }
+      if (mobileRsvp && !drawer.classList.contains('open')) {
+        mobileRsvp.classList.add('scrolled');
+      }
+    } else {
+      scrollNav.classList.remove('visible');
+      if (hamburgerBtn && !hamburgerBtn.classList.contains('open')) {
+        hamburgerBtn.classList.remove('scrolled');
+      }
+      if (mobileRsvp && !drawer.classList.contains('open')) {
+        mobileRsvp.classList.remove('scrolled');
+      }
+    }
+  }
+  
+  const observer = new MutationObserver(() => {
+    if (!drawer.classList.contains('open') && hamburgerBtn) {
+      if (foodSection && foodSection.getBoundingClientRect().top <= 56) {
+        hamburgerBtn.classList.add('scrolled');
+        if(mobileRsvp) mobileRsvp.classList.add('scrolled');
+      } else {
+        hamburgerBtn.classList.remove('scrolled');
+        if(mobileRsvp) mobileRsvp.classList.remove('scrolled');
+      }
+    } else if (drawer.classList.contains('open') && hamburgerBtn) {
+      hamburgerBtn.classList.remove('scrolled');
+      if(mobileRsvp) {
+        mobileRsvp.classList.remove('scrolled');
+        mobileRsvp.classList.add('drawer-open');
+      }
+    } else if (!drawer.classList.contains('open') && mobileRsvp) {
+      mobileRsvp.classList.remove('drawer-open');
+      if (foodSection && foodSection.getBoundingClientRect().top <= 56) {
+        mobileRsvp.classList.add('scrolled');
+      } else {
+        mobileRsvp.classList.remove('scrolled');
+      }
+    }
+  });
+  observer.observe(drawer, { attributes: true, attributeFilter: ['class'] });
+  
+  window.addEventListener('scroll', handleScrollAndNavbar, { passive: true });
+  window.addEventListener('load', () => {
+    handleScrollAndNavbar();
+    if (mobileRsvp) mobileRsvp.classList.remove('scrolled');
+    if (hamburgerBtn) hamburgerBtn.classList.remove('scrolled');
+  });
+  
+  // testimonial slider
+  const track = document.querySelector('.testimonial-track');
+  const items = document.querySelectorAll('.testimonial-item');
+  const prevBtn = document.querySelector('.prev');
+  const nextBtn = document.querySelector('.next');
+  let index = 0;
+  function updateSlider() { if(track) track.style.transform = `translateX(-${index * 100}%)`; }
+  if(nextBtn) nextBtn.addEventListener('click', () => { index = (index + 1) % items.length; updateSlider(); });
+  if(prevBtn) prevBtn.addEventListener('click', () => { index = (index - 1 + items.length) % items.length; updateSlider(); });
+</script>
+</body>
+</html>
